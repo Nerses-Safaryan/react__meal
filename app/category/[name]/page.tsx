@@ -1,40 +1,37 @@
 import { MealList } from "@/components/content/MealList";
 
+
+
 type Meal = {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-  strMealAlternate?: string | null;
-  strCategory?: string;
-  strArea?: string;
-  strInstructions?: string;
-  strYoutube?: string;
-  [key: string]: string | null | undefined;
-};
-
-type MealResponse = {
-  meals: Meal[];
-};
-
-interface PageProps {
-  params: {
-    name: string;
-  };
+    strMeal: string;
+    strMealThumb: string;
+    idMeal: string;
 }
 
-export default async function Page({ params }: PageProps) {
-  const { name } =  params;
 
-  const res = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${name}`
-  );
-  if (!res.ok) throw new Error(`Failed to fetch meals for category ${name}`);
+type MealsResponse = {
+    meals: Meal[];
+}
 
-  const data: MealResponse = await res.json();
+type Params = {
+    params: Promise<{name: string}>
+}
 
-  return (
-    <div>
-      <MealList meals={data.meals} />
-    </div>
-  );
+
+export default async function page({params}: Params) {
+
+    const {name} = await params;
+
+    const res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${name}`);
+    if(!res.ok) throw new Error(`Failed to fetch meanls for category ${name}`);
+
+    const data: MealsResponse = await res.json();
+
+
+    return (
+        <div>
+            {/* { JSON.stringify(data) } */}
+            <MealList meals={data.meals} />
+        </div>
+    )
 }
