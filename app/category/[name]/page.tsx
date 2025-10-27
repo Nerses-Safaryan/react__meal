@@ -16,7 +16,7 @@ type MealResponse = {
   meals: Meal[];
 };
 
-interface PageProps {
+interface Params {
   params: { name: string }
 }
 
