@@ -16,12 +16,14 @@ type MealResponse = {
   meals: Meal[];
 };
 
-interface Params {
-  params: { name: string }
+interface PageProps {
+  params: {
+    name: string;
+  };
 }
 
-export default async function Page({ params }: Params) {
-  const { name } = params;
+export default async function Page({ params }: PageProps) {
+  const { name } =  params;
 
   const res = await fetch(
     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${name}`
