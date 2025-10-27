@@ -1,4 +1,4 @@
-import { Meal } from '@/components/content/Meal';
+import { Meal } from '@/components/content/Meal'
 import React from 'react'
 
 

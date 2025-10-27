@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-export type Meal = {
+type Meal = {
   idMeal: string;
   strMeal: string;
   strCategory: string;
