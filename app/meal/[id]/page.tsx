@@ -15,7 +15,6 @@ type Meal = {
   strInstructions: string;
   strMealThumb: string;
   strYoutube: string;
-  [key: string]: string | number | null;
 }
 
 type MealResponse = {
