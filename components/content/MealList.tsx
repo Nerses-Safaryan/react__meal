@@ -48,15 +48,11 @@ export function MealList({ meals }: Props) {
       </div>
 
       <div className="flex justify-center gap-3 mt-5 items-center">
-        <button className="cursor-pointer" onClick={prev} disabled={page === 1}>
-          Prev
-        </button>
+        <button className="cursor-pointer" onClick={prev} disabled={page === 1}>Prev</button>
         <span>
           {page} / {totalPages}
         </span>
-        <button className="cursor-pointer" onClick={next} disabled={page === totalPages}>
-          Next
-        </button>
+        <button className="cursor-pointer" onClick={next} disabled={page === totalPages}>Next</button>
       </div>
     </div>
   );

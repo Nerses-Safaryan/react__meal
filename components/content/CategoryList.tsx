@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 type Category = {
   idCategory: string;
@@ -18,10 +18,22 @@ type Props = {
 export default function CategoryList({ categories }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(categories.length / itemsPerPage);
+
+  const prev = () => setPage((p) => Math.max(1, p - 1));
+  const next = () => setPage((p) => Math.min(totalPages, p + 1));
+
+  const current = useMemo(() => {
+    const start = (page - 1) * itemsPerPage;
+    return categories.slice(start, start + itemsPerPage);
+  }, [page, categories]);
+
   return (
     <div>
       <ul className="grid grid-cols-4 gap-5">
-        {categories.map((item) => (
+        {current.map((item) => (
           <li className="shadow-md rounded-md p-3" key={item.idCategory}>
             <Image
               src={item.strCategoryThumb}
@@ -53,6 +65,14 @@ export default function CategoryList({ categories }: Props) {
           </li>
         ))}
       </ul>
+
+      <div className="flex justify-center gap-3 mt-5 items-center">
+        <button className="cursor-pointer" onClick={prev} disabled={page === 1}>Prev</button>
+        <span>
+          {page} / {totalPages}
+        </span>
+        <button className="cursor-pointer" onClick={next} disabled={page === totalPages}>Next</button>
+      </div>
 
       {selectedCategory && (
         <div

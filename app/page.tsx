@@ -19,7 +19,7 @@ export default async function HomePage() {
   const data: CategoryResponse = await res.json();
 
   return (
-    <div className="Home container p-4">
+    <div className="Home container p-4 m-auto">
       <h1 className="text-center text-3xl text-gray-800 font-semibold mb-3">
         Category list
       </h1>
